@@ -1,4 +1,7 @@
 FROM node:24 AS installer
+COPY certs/corp-ca.crt /usr/local/share/ca-certificates/corp-ca.crt
+RUN update-ca-certificates
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/corp-ca.crt
 COPY . /juice-shop
 WORKDIR /juice-shop
 RUN npm install -g typescript@^6.0.3
